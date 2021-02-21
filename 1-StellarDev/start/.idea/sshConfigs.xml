@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="vps809146.ovh.net" id="7c1cb2bf-9b93-4e92-a093-1043afce9990" keyPath="$USER_HOME$/.ssh/id_rsa" port="974" customName="vps809146.ovh.net" nameFormat="CUSTOM" username="niko">
+        <option name="customName" value="vps809146.ovh.net" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

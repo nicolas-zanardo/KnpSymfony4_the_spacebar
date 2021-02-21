@@ -1,0 +1,11 @@
+{% extends 'article_admin/article_admin_base.html.twig' %}
+
+
+{% block title %} Edit the article {% endblock %}
+
+{% block content_body %}
+    <h1>Edit the article! 🚀</h1>
+
+    {{ include('article_admin/_form.html.twig', {button_text:"Update !"}) }}
+
+{% endblock %}

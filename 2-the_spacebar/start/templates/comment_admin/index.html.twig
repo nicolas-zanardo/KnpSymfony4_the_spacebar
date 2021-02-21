@@ -1,0 +1,79 @@
+{% extends 'content_base.html.twig' %}
+
+{% block title %}Manage Comments{% endblock %}
+
+{% block content_class %}{{ parent() }} border-top border-5 border-success{% endblock %}
+
+{% block content_body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Manage comments ({{ pagination.getTotalItemCount }})</h1>
+
+            <form>
+                <div class="input-group mb-3">
+                    <input type="text"
+                           name="q"
+                           class="form-control"
+                           placeholder="Search..."
+                           value="{{ app.request.query.get('q') }}"
+                    >
+                    <div class="input-group-append">
+                        <button type="submit"
+                                class="btn btn-outline-secondary">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th{% if pagination.isSorted('article') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'Article', 'article') }}
+                    </th>
+                    <th{% if pagination.isSorted('authorName') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'Author', 'authorName') }}
+                    </th>
+                    <th>
+                        Comment
+                    </th>
+                    <th{% if pagination.isSorted('createdAt') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'Created', 'createdAt') }}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in pagination %}
+                    <tr {% if loop.index is odd %}class="color"{% endif %}>
+                        <td>
+                            <a href="{{ path('article_show', {slug: comment.article.slug}) }}">
+                                {{ comment.article.title }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ comment.authorName }}
+                        </td>
+                        <td style="width:20%">
+                            {{ comment.content|truncate }}
+                        </td>
+                        <td>
+                            {{ comment.createdAt|ago }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            No Comments Found
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
